@@ -200,6 +200,9 @@
             font-size: 3.5rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .hero p {
@@ -207,6 +210,14 @@
             max-width: 600px;
             margin: 0 auto 2rem;
             opacity: 0.9;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .hero-content.fade-out h1,
+        .hero-content.fade-out p {
+            opacity: 0;
+            transform: translateY(-20px);
         }
 
         .hero-btn {
@@ -1172,9 +1183,9 @@
             <div class="hero-slide"></div>
             <div class="hero-slide"></div>
         </div>
-        <div class="hero-content">
-            <h1>Productos Agropecuarios de Calidad</h1>
-            <p>Encuentra todo lo que necesitas para tu campo: semillas, fertilizantes, herramientas y mucho mas. Calidad garantizada para mejores cosechas.</p>
+        <div class="hero-content" id="hero-content">
+            <h1 id="hero-title">Productos Agropecuarios de Calidad</h1>
+            <p id="hero-description">Encuentra todo lo que necesitas para tu campo: semillas, fertilizantes, herramientas y mucho mas. Calidad garantizada para mejores cosechas.</p>
             <button class="hero-btn" onclick="document.getElementById('productos').scrollIntoView({behavior: 'smooth'})">
                 Ver Productos
             </button>
@@ -1784,6 +1795,22 @@
         let currentHeroSlide = 0;
         const totalHeroSlides = 3;
 
+        // Hero content for each slide
+        const heroContent = [
+            {
+                title: "Productos Agropecuarios de Calidad",
+                description: "Encuentra todo lo que necesitas para tu campo: semillas, fertilizantes, herramientas y mucho mas. Calidad garantizada para mejores cosechas."
+            },
+            {
+                title: "Cosechas Abundantes Todo el Año",
+                description: "Maximiza tu produccion agricola con nuestros productos premium. Tecnologia e innovacion al servicio del agricultor moderno."
+            },
+            {
+                title: "Maquinaria y Equipos Profesionales",
+                description: "Equipate con las mejores herramientas del mercado. Eficiencia y durabilidad para optimizar tu trabajo en el campo."
+            }
+        ];
+
         function goToHeroSlide(index) {
             currentHeroSlide = index;
             updateHeroSlideshow();
@@ -1792,14 +1819,28 @@
         function updateHeroSlideshow() {
             const slides = document.querySelectorAll('.hero-slide');
             const indicators = document.querySelectorAll('.hero-indicator');
+            const heroContentEl = document.getElementById('hero-content');
+            const heroTitle = document.getElementById('hero-title');
+            const heroDescription = document.getElementById('hero-description');
 
+            // Update slides
             slides.forEach((slide, index) => {
                 slide.classList.toggle('active', index === currentHeroSlide);
             });
 
+            // Update indicators
             indicators.forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === currentHeroSlide);
             });
+
+            // Animate text change
+            heroContentEl.classList.add('fade-out');
+
+            setTimeout(() => {
+                heroTitle.textContent = heroContent[currentHeroSlide].title;
+                heroDescription.textContent = heroContent[currentHeroSlide].description;
+                heroContentEl.classList.remove('fade-out');
+            }, 500);
         }
 
         function nextHeroSlide() {
