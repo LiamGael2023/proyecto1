@@ -1055,7 +1055,7 @@
         ];
 
         // Cart State
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cart = JSON.parse(localStorage.getItem('agromarket-cart')) || [];
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
@@ -1214,7 +1214,7 @@
 
         // Save Cart to LocalStorage
         function saveCart() {
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('agromarket-cart', JSON.stringify(cart));
         }
 
         // Checkout
