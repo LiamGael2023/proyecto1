@@ -1619,7 +1619,7 @@
         <div class="cart-footer">
             <div class="cart-total">
                 <span>Total:</span>
-                <span id="cart-total">$0.00</span>
+                <span id="cart-total">S/ 0.00</span>
             </div>
             <button class="checkout-btn" onclick="checkout()">
                 <i class="fas fa-credit-card"></i> Proceder al Pago
@@ -1796,7 +1796,7 @@
                         <h3 class="product-name">${product.name}</h3>
                         <p class="product-description">${product.description}</p>
                         <div class="product-footer">
-                            <span class="product-price">$${product.price.toFixed(2)}</span>
+                            <span class="product-price">S/ ${product.price.toFixed(2)}</span>
                             <button class="add-to-cart" onclick="addToCart(${product.id})">
                                 <i class="fas fa-cart-plus"></i> Agregar
                             </button>
@@ -1862,7 +1862,7 @@
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
             cartCount.textContent = totalItems;
-            cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+            cartTotal.textContent = `S/ ${totalPrice.toFixed(2)}`;
 
             if (cart.length === 0) {
                 cartItems.innerHTML = `
@@ -1877,7 +1877,7 @@
                         <img src="${item.image}" alt="${item.name}" class="cart-item-image">
                         <div class="cart-item-details">
                             <h4 class="cart-item-name">${item.name}</h4>
-                            <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                            <p class="cart-item-price">S/ ${item.price.toFixed(2)}</p>
                             <div class="cart-item-controls">
                                 <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
                                 <span class="quantity">${item.quantity}</span>
