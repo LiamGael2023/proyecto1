@@ -652,6 +652,281 @@
             transform: translateX(0);
         }
 
+        /* Floating Social Buttons */
+        .floating-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1500;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128c7e;
+        }
+
+        .facebook-btn {
+            background: #1877f2;
+        }
+
+        .facebook-btn:hover {
+            background: #0d5bbd;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        /* Gallery Carousel */
+        .gallery {
+            padding: 4rem 2rem;
+            background: var(--white);
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            padding: 0 0.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: '\f00e';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--white);
+            font-size: 2rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(45, 80, 22, 0.5);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: var(--secondary-green);
+        }
+
+        .carousel-btn.prev {
+            left: 10px;
+        }
+
+        .carousel-btn.next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .carousel-dot.active {
+            background: var(--primary-green);
+            transform: scale(1.2);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 5000;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover {
+            color: var(--wheat);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .lightbox-nav:hover {
+            background: var(--wheat);
+            color: var(--primary-green);
+        }
+
+        .lightbox-prev {
+            left: -70px;
+        }
+
+        .lightbox-next {
+            right: -70px;
+        }
+
+        .lightbox-caption {
+            text-align: center;
+            color: var(--white);
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
         /* Mobile Menu */
         .menu-toggle {
             display: none;
@@ -751,6 +1026,34 @@
 
             .cart-btn span {
                 display: none;
+            }
+
+            .floating-buttons {
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .carousel-slide {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
             }
         }
     </style>
@@ -862,6 +1165,60 @@
         </div>
     </section>
 
+    <!-- Gallery Carousel -->
+    <section class="gallery">
+        <div class="gallery-container">
+            <div class="section-title">
+                <h2>Nuestra Galeria</h2>
+                <p>Conoce nuestro trabajo y productos en accion</p>
+            </div>
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev" onclick="moveCarousel(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel" id="carousel">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide">
+                        <div class="gallery-item" onclick="openLightbox(0)">
+                            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600" alt="Campo de trigo" loading="lazy">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(1)">
+                            <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600" alt="Cultivo de hortalizas" loading="lazy">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(2)">
+                            <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=600" alt="Tomates frescos" loading="lazy">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(3)">
+                            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600" alt="Invernadero" loading="lazy">
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide">
+                        <div class="gallery-item" onclick="openLightbox(4)">
+                            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600" alt="Cosecha" loading="lazy">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(5)">
+                            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600" alt="Tractor en campo" loading="lazy">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(6)">
+                            <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=600" alt="Plantas jovenes" loading="lazy">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox(7)">
+                            <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600" alt="Zanahorias frescas" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" onclick="moveCarousel(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="carousel-dots" id="carousel-dots">
+                <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+                <button class="carousel-dot" onclick="goToSlide(1)"></button>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer id="contacto">
         <div class="footer-content">
@@ -927,6 +1284,33 @@
     <div class="notification" id="notification">
         <i class="fas fa-check-circle"></i>
         <span id="notification-text">Producto agregado al carrito</span>
+    </div>
+
+    <!-- Floating Social Buttons -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/1234567890?text=Hola,%20me%20interesa%20obtener%20informacion%20sobre%20sus%20productos" class="floating-btn whatsapp-btn" target="_blank" title="Contactanos por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://facebook.com/agromarket" class="floating-btn facebook-btn" target="_blank" title="Siguenos en Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <img src="" alt="" id="lightbox-image">
+            <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
     </div>
 
     <script>
@@ -1203,6 +1587,104 @@
             updateCartUI();
             toggleCart();
         }
+
+        // Gallery Data
+        const galleryImages = [
+            { src: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200', caption: 'Campo de trigo dorado' },
+            { src: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1200', caption: 'Cultivo de hortalizas frescas' },
+            { src: 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=1200', caption: 'Tomates cherry maduros' },
+            { src: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200', caption: 'Invernadero moderno' },
+            { src: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1200', caption: 'Tiempo de cosecha' },
+            { src: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200', caption: 'Tractor trabajando el campo' },
+            { src: 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1200', caption: 'Plantas jovenes creciendo' },
+            { src: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=1200', caption: 'Zanahorias frescas organicas' }
+        ];
+
+        // Carousel State
+        let currentSlide = 0;
+        const totalSlides = 2;
+
+        // Move Carousel
+        function moveCarousel(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            updateCarousel();
+        }
+
+        // Go to Specific Slide
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        // Update Carousel Position
+        function updateCarousel() {
+            const carousel = document.getElementById('carousel');
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // Update dots
+            const dots = document.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Auto-play Carousel
+        setInterval(() => {
+            moveCarousel(1);
+        }, 5000);
+
+        // Lightbox State
+        let currentImageIndex = 0;
+
+        // Open Lightbox
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+
+            lightboxImage.src = galleryImages[index].src;
+            lightboxImage.alt = galleryImages[index].caption;
+            lightboxCaption.textContent = galleryImages[index].caption;
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close Lightbox
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Navigate Lightbox
+        function navigateLightbox(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
+            if (currentImageIndex >= galleryImages.length) currentImageIndex = 0;
+
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+
+            lightboxImage.src = galleryImages[currentImageIndex].src;
+            lightboxImage.alt = galleryImages[currentImageIndex].caption;
+            lightboxCaption.textContent = galleryImages[currentImageIndex].caption;
+        }
+
+        // Close Lightbox on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+        });
+
+        // Close Lightbox on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
     </script>
 </body>
 </html>
