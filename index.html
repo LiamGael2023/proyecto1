@@ -372,25 +372,81 @@
             color: var(--text-light);
         }
 
+        .category-carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
         .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
             gap: 1.5rem;
+            padding: 1rem 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .category-grid::-webkit-scrollbar {
+            display: none;
         }
 
         .category-card {
             background: var(--white);
-            padding: 2rem 1rem;
+            padding: 1rem;
             border-radius: 15px;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
             box-shadow: var(--shadow);
+            min-width: 150px;
+            flex-shrink: 0;
         }
 
         .category-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-hover);
+        }
+
+        .category-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 0.8rem;
+        }
+
+        .category-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .category-nav:hover {
+            background: var(--dark-green);
+        }
+
+        .category-nav.prev {
+            left: 0;
+        }
+
+        .category-nav.next {
+            right: 0;
         }
 
         .category-card i {
@@ -1433,31 +1489,71 @@
             <h2>Categorias</h2>
             <p>Explora nuestra variedad de productos agricolas</p>
         </div>
-        <div class="category-grid">
-            <div class="category-card" onclick="filterProducts('semillas')">
-                <i class="fas fa-seedling"></i>
-                <h3>Semillas</h3>
+        <div class="category-carousel-container">
+            <button class="category-nav prev" onclick="scrollCategories(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="category-grid" id="category-carousel">
+                <div class="category-card" onclick="filterProducts('alimentos-procesados')">
+                    <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=200&h=200&fit=crop" alt="Alimentos Procesados">
+                    <h3>Alimentos Procesados</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('carnes')">
+                    <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=200&h=200&fit=crop" alt="Carnes">
+                    <h3>Carnes</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('cereales')">
+                    <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=200&h=200&fit=crop" alt="Cereales">
+                    <h3>Cereales</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('deshidratados')">
+                    <img src="https://images.unsplash.com/photo-1596591868231-05e908752cc9?w=200&h=200&fit=crop" alt="Deshidratados">
+                    <h3>Deshidratados</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('frutas')">
+                    <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=200&h=200&fit=crop" alt="Frutas">
+                    <h3>Frutas</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('hortalizas')">
+                    <img src="https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=200&h=200&fit=crop" alt="Hortalizas">
+                    <h3>Hortalizas</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('industrializados')">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop" alt="Industrializados">
+                    <h3>Industrializados</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('lacteos')">
+                    <img src="https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=200&h=200&fit=crop" alt="Lacteos">
+                    <h3>Lacteos</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('leguminosas')">
+                    <img src="https://images.unsplash.com/photo-1515543904323-87f0fc4329e2?w=200&h=200&fit=crop" alt="Leguminosas">
+                    <h3>Leguminosas</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('manualidades')">
+                    <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=200&h=200&fit=crop" alt="Manualidades">
+                    <h3>Manualidades</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('productos-andinos')">
+                    <img src="https://images.unsplash.com/photo-1594561456652-2a3ada71024e?w=200&h=200&fit=crop" alt="Productos Andinos">
+                    <h3>Productos Andinos</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('semillas')">
+                    <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=200&h=200&fit=crop" alt="Semillas">
+                    <h3>Semillas</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('tuberculos')">
+                    <img src="https://images.unsplash.com/photo-1518977676601-b53f82ber83?w=200&h=200&fit=crop" alt="Tuberculos">
+                    <h3>Tuberculos</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('verduras')">
+                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=200&h=200&fit=crop" alt="Verduras">
+                    <h3>Verduras</h3>
+                </div>
             </div>
-            <div class="category-card" onclick="filterProducts('fertilizantes')">
-                <i class="fas fa-flask"></i>
-                <h3>Fertilizantes</h3>
-            </div>
-            <div class="category-card" onclick="filterProducts('herramientas')">
-                <i class="fas fa-tools"></i>
-                <h3>Herramientas</h3>
-            </div>
-            <div class="category-card" onclick="filterProducts('riego')">
-                <i class="fas fa-tint"></i>
-                <h3>Riego</h3>
-            </div>
-            <div class="category-card" onclick="filterProducts('proteccion')">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Proteccion</h3>
-            </div>
-            <div class="category-card" onclick="filterProducts('todos')">
-                <i class="fas fa-th-large"></i>
-                <h3>Ver Todo</h3>
-            </div>
+            <button class="category-nav next" onclick="scrollCategories(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
     </section>
 
@@ -1804,6 +1900,16 @@
                     </div>
                 </div>
             `).join('');
+        }
+
+        // Scroll Categories Carousel
+        function scrollCategories(direction) {
+            const carousel = document.getElementById('category-carousel');
+            const scrollAmount = 200;
+            carousel.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
         }
 
         // Filter Products
