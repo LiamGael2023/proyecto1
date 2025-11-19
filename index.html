@@ -1912,22 +1912,34 @@
             });
         }
 
-        // Auto-scroll Categories Carousel
+        // Auto-scroll Categories Carousel (Infinite)
         let categoryAutoScroll;
+        function initCategoryCarousel() {
+            const carousel = document.getElementById('category-carousel');
+            const items = carousel.innerHTML;
+            carousel.innerHTML = items + items; // Duplicate items for infinite effect
+        }
+
         function startCategoryAutoScroll() {
             const carousel = document.getElementById('category-carousel');
+            const originalWidth = carousel.scrollWidth / 2;
+
             categoryAutoScroll = setInterval(() => {
-                if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth) {
-                    carousel.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    carousel.scrollBy({ left: 200, behavior: 'smooth' });
-                }
+                carousel.scrollBy({ left: 200, behavior: 'smooth' });
+
+                // Reset to start when reaching the duplicated content
+                setTimeout(() => {
+                    if (carousel.scrollLeft >= originalWidth) {
+                        carousel.scrollLeft = carousel.scrollLeft - originalWidth;
+                    }
+                }, 500);
             }, 3000);
         }
 
         // Pause auto-scroll on hover
         document.addEventListener('DOMContentLoaded', () => {
             const carousel = document.getElementById('category-carousel');
+            initCategoryCarousel();
             startCategoryAutoScroll();
 
             carousel.addEventListener('mouseenter', () => {
