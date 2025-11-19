@@ -1107,6 +1107,73 @@
             font-size: 1.1rem;
         }
 
+        /* Contact Bar */
+        .contact-bar {
+            background: var(--accent-green);
+            padding: 3rem 2rem;
+        }
+
+        .contact-bar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .contact-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-bar-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-bar-icon i {
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .contact-bar-text h3 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-bar-text p {
+            color: var(--earth-brown);
+            font-size: 0.95rem;
+        }
+
+        .contact-bar-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .contact-bar-btn:hover {
+            background: var(--secondary-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
         /* Mobile Menu */
         .menu-toggle {
             display: none;
@@ -1250,6 +1317,19 @@
 
             .lightbox-next {
                 right: 10px;
+            }
+
+            .contact-bar-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-bar-left {
+                flex-direction: column;
+            }
+
+            .contact-bar-text h3 {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -1457,6 +1537,24 @@
                 <button class="carousel-dot active" onclick="goToSlide(0)"></button>
                 <button class="carousel-dot" onclick="goToSlide(1)"></button>
             </div>
+        </div>
+    </section>
+
+    <!-- Contact Bar -->
+    <section class="contact-bar">
+        <div class="contact-bar-content">
+            <div class="contact-bar-left">
+                <div class="contact-bar-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-bar-text">
+                    <h3>Póngase en contacto con nosotros</h3>
+                    <p>Estaremos encantados de responder a sus preguntas.</p>
+                </div>
+            </div>
+            <button class="contact-bar-btn" onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">
+                Quiero más información
+            </button>
         </div>
     </section>
 
