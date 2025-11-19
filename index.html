@@ -37,6 +37,53 @@
             line-height: 1.6;
         }
 
+        /* Top Bar */
+        .top-bar {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 0.5rem 2rem;
+            font-size: 0.85rem;
+        }
+
+        .top-bar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .top-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .top-bar-item i {
+            color: var(--wheat);
+        }
+
+        .top-bar-right {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .top-bar-link {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .top-bar-link:hover {
+            color: var(--wheat);
+        }
+
         /* Header */
         header {
             background: var(--white);
@@ -68,6 +115,45 @@
         .logo img {
             height: 50px;
             width: auto;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--cream);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
+        }
+
+        .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            width: 100%;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-light);
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            color: var(--secondary-green);
+            cursor: pointer;
+            padding: 0.3rem;
+            transition: var(--transition);
+        }
+
+        .search-bar button:hover {
+            color: var(--primary-green);
         }
 
         .nav-links {
@@ -1033,6 +1119,22 @@
 
         /* Responsive Design */
         @media (max-width: 968px) {
+            .top-bar-content {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .top-bar-left,
+            .top-bar-right {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
             .nav-links {
                 display: none;
             }
@@ -1153,16 +1255,50 @@
     </style>
 </head>
 <body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="top-bar-left">
+                <div class="top-bar-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Compra las 24 horas</span>
+                </div>
+                <div class="top-bar-item">
+                    <i class="fas fa-truck"></i>
+                    <span>Envio a todo el pais</span>
+                </div>
+                <div class="top-bar-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+1 234 567 890</span>
+                </div>
+            </div>
+            <div class="top-bar-right">
+                <a href="#nosotros" class="top-bar-link">Nosotros</a>
+                <a href="#seguimiento" class="top-bar-link">Seguimiento de Pedido</a>
+                <a href="#tienda" class="top-bar-link">Nuestra Tienda</a>
+                <a href="#promociones" class="top-bar-link">Promociones</a>
+                <a href="#pago-entrega" class="top-bar-link">Pago y Entrega</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header>
         <nav>
             <a href="#" class="logo">
                 <img src="https://elquende.com/wp-content/uploads/2022/10/logocolor1.svg" alt="Logo">
             </a>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar productos..." id="search-input" onkeyup="searchProducts(event)">
+                <button onclick="performSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#productos">Productos</a></li>
                 <li><a href="#categorias">Categorias</a></li>
+                <li><a href="#galeria">Galeria</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
             <button class="cart-btn" onclick="toggleCart()">
@@ -1850,6 +1986,37 @@
 
         // Auto-play hero slideshow every 4 seconds
         setInterval(nextHeroSlide, 4000);
+
+        // Search Products
+        function searchProducts(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+
+        function performSearch() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+
+            if (searchTerm === '') {
+                renderProducts(products);
+                return;
+            }
+
+            const filtered = products.filter(product =>
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm)
+            );
+
+            renderProducts(filtered);
+            document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
+
+            if (filtered.length === 0) {
+                showNotification('No se encontraron productos');
+            } else {
+                showNotification(`Se encontraron ${filtered.length} producto(s)`);
+            }
+        }
     </script>
 </body>
 </html>
