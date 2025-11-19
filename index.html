@@ -1527,11 +1527,11 @@
                     <h3>Lacteos</h3>
                 </div>
                 <div class="category-card" onclick="filterProducts('leguminosas')">
-                    <img src="https://images.unsplash.com/photo-1515543904323-87f0fc4329e2?w=200&h=200&fit=crop" alt="Leguminosas">
+                    <img src="https://elquende.com/wp-content/uploads/2022/08/Arverja-verde.jpg" alt="Leguminosas">
                     <h3>Leguminosas</h3>
                 </div>
                 <div class="category-card" onclick="filterProducts('manualidades')">
-                    <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=200&h=200&fit=crop" alt="Manualidades">
+                    <img src="https://elquende.com/wp-content/uploads/2022/08/Pinas-de-pino-1.jpg" alt="Manualidades">
                     <h3>Manualidades</h3>
                 </div>
                 <div class="category-card" onclick="filterProducts('productos-andinos')">
@@ -1543,7 +1543,7 @@
                     <h3>Semillas</h3>
                 </div>
                 <div class="category-card" onclick="filterProducts('tuberculos')">
-                    <img src="https://images.unsplash.com/photo-1518977676601-b53f82abe043?w=200&h=200&fit=crop" alt="Tuberculos">
+                    <img src="https://elquende.com/wp-content/uploads/2022/11/IMG_20180512_094029-removebg-preview.png" alt="Tuberculos">
                     <h3>Tuberculos</h3>
                 </div>
                 <div class="category-card" onclick="filterProducts('verduras')">
@@ -1911,6 +1911,33 @@
                 behavior: 'smooth'
             });
         }
+
+        // Auto-scroll Categories Carousel
+        let categoryAutoScroll;
+        function startCategoryAutoScroll() {
+            const carousel = document.getElementById('category-carousel');
+            categoryAutoScroll = setInterval(() => {
+                if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth) {
+                    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    carousel.scrollBy({ left: 200, behavior: 'smooth' });
+                }
+            }, 3000);
+        }
+
+        // Pause auto-scroll on hover
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.getElementById('category-carousel');
+            startCategoryAutoScroll();
+
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(categoryAutoScroll);
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                startCategoryAutoScroll();
+            });
+        });
 
         // Filter Products
         function filterProducts(category) {
