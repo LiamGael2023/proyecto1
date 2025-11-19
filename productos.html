@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos los Productos - El Quende</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2d5016;
+            --secondary-green: #4a7c23;
+            --light-green: #8bc34a;
+            --accent-green: #c5e1a5;
+            --earth-brown: #5d4e37;
+            --light-brown: #8b7355;
+            --cream: #f5f1eb;
+            --wheat: #f9a825;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 0.5rem 2rem;
+            font-size: 0.85rem;
+        }
+
+        .top-bar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .top-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .top-bar-item i {
+            color: var(--wheat);
+        }
+
+        .top-bar-right {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .top-bar-link {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .top-bar-link:hover {
+            color: var(--wheat);
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-green);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--cream);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            padding: 0.3rem;
+            font-family: inherit;
+            width: 150px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--secondary-green);
+        }
+
+        .cart-btn {
+            position: relative;
+            background: var(--secondary-green);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .cart-btn:hover {
+            background: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--wheat);
+            color: var(--text-dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 50%;
+        }
+
+        /* Page Title */
+        .page-title {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .page-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            opacity: 0.9;
+        }
+
+        /* Categories Filter */
+        .categories-filter {
+            background: var(--white);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .categories-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .categories-container h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-green);
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .category-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid var(--secondary-green);
+            background: var(--white);
+            color: var(--secondary-green);
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--secondary-green);
+            color: var(--white);
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .products-count {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .product-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--wheat);
+            color: var(--text-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: var(--secondary-green);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+            color: var(--text-dark);
+        }
+
+        .product-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .add-to-cart {
+            background: var(--secondary-green);
+            color: var(--white);
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            font-weight: 500;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-green);
+            transform: scale(1.05);
+        }
+
+        .add-to-cart i {
+            margin-right: 0.3rem;
+        }
+
+        /* Cart Sidebar */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1999;
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100%;
+            background: var(--white);
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            background: var(--primary-green);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-size: 1.2rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+        }
+
+        .cart-empty i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-green);
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--cream);
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-price {
+            color: var(--secondary-green);
+            font-weight: 600;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border: 1px solid var(--accent-green);
+            background: var(--white);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .quantity {
+            padding: 0 0.5rem;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 2px solid var(--cream);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--secondary-green);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background: var(--primary-green);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .footer-section i {
+            margin-right: 0.5rem;
+            color: var(--wheat);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--wheat);
+            color: var(--primary-green);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom img {
+            max-height: 30px;
+            width: auto;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--secondary-green);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transform: translateX(150%);
+            transition: var(--transition);
+            z-index: 3000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Back to Home Button */
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-green);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .back-home:hover {
+            color: var(--primary-green);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .top-bar-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .category-buttons {
+                justify-content: center;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+
+            .page-title h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="top-bar-left">
+                <div class="top-bar-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Compra las 24 horas</span>
+                </div>
+                <div class="top-bar-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(+51) 921363919</span>
+                </div>
+            </div>
+            <div class="top-bar-right">
+                <a href="index.html#nosotros" class="top-bar-link">Nosotros</a>
+                <a href="#" class="top-bar-link">Seguimiento de Pedido</a>
+                <a href="index.html" class="top-bar-link">Nuestra Tienda</a>
+                <a href="#" class="top-bar-link">Promociones</a>
+                <a href="#" class="top-bar-link">Pago y Entrega</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://elquende.com/wp-content/uploads/2022/10/logocolor1.svg" alt="El Quende Logo">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#" class="active">Productos</a></li>
+                <li><a href="index.html#categorias">Categorias</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar producto..." id="search-input">
+                    <button onclick="searchProducts()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <h1>Todos los Productos</h1>
+        <p>Explora nuestra variedad completa de productos agropecuarios</p>
+    </section>
+
+    <!-- Categories Filter -->
+    <section class="categories-filter">
+        <div class="categories-container">
+            <h3><i class="fas fa-filter"></i> Filtrar por Categoria</h3>
+            <div class="category-buttons">
+                <button class="category-btn active" onclick="filterByCategory('todos')">Todos</button>
+                <button class="category-btn" onclick="filterByCategory('alimentos-procesados')">Alimentos Procesados</button>
+                <button class="category-btn" onclick="filterByCategory('carnes')">Carnes</button>
+                <button class="category-btn" onclick="filterByCategory('cereales')">Cereales</button>
+                <button class="category-btn" onclick="filterByCategory('deshidratados')">Deshidratados</button>
+                <button class="category-btn" onclick="filterByCategory('frutas')">Frutas</button>
+                <button class="category-btn" onclick="filterByCategory('hortalizas')">Hortalizas</button>
+                <button class="category-btn" onclick="filterByCategory('industrializados')">Industrializados</button>
+                <button class="category-btn" onclick="filterByCategory('lacteos')">Lacteos</button>
+                <button class="category-btn" onclick="filterByCategory('leguminosas')">Leguminosas</button>
+                <button class="category-btn" onclick="filterByCategory('manualidades')">Manualidades</button>
+                <button class="category-btn" onclick="filterByCategory('productos-andinos')">Productos Andinos</button>
+                <button class="category-btn" onclick="filterByCategory('semillas')">Semillas</button>
+                <button class="category-btn" onclick="filterByCategory('tuberculos')">Tuberculos</button>
+                <button class="category-btn" onclick="filterByCategory('verduras')">Verduras</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <a href="index.html" class="back-home">
+            <i class="fas fa-arrow-left"></i> Volver al Inicio
+        </a>
+        <p class="products-count" id="products-count">Mostrando todos los productos</p>
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="https://elquende.com/wp-content/uploads/2022/10/logoblanco1.svg" alt="El Quende Logo" style="height: 60px; margin-bottom: 1rem;">
+                <p>Tu aliado en el campo. Ofrecemos los mejores productos agropecuarios para optimizar tu produccion agricola.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Caserio San Juan Bajo - Chugay - Sanchez Carrion - La Libertad</p>
+                <p><i class="fas fa-phone"></i> (+51) 921363919</p>
+                <p><i class="fas fa-phone"></i> (+51) 976815300</p>
+                <p><i class="fas fa-phone"></i> (+51) 983050370</p>
+                <p><i class="fas fa-envelope"></i> elquende.com@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h4>Auspiciadores</h4>
+                <img src="https://elquende.com/wp-content/uploads/elementor/thumbs/Logo-r629q1phwggemzz8sh10a1n6z647hgeb4941hnjzmo.jpg" alt="Auspiciador" style="max-width: 550px; width: 100%; border-radius: 10px; margin-top: 0.5rem;">
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Asociacion de productores agropecuarios &copy; 2022 DISENADO POR ING. CESAR MANUEL HERRERA VERGARA</p>
+            <img src="https://elquende.com/wp-content/themes/woodmart/images/payments.png" alt="Metodos de pago">
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be loaded dynamically -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total">S/ 0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">
+                <i class="fas fa-credit-card"></i> Proceder al Pago
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notification-text"></span>
+    </div>
+
+    <script>
+        // Products Data - Extended list
+        const products = [
+            {
+                id: 1,
+                name: 'Semillas de Maiz Premium',
+                description: 'Semillas certificadas de alto rendimiento',
+                price: 45.99,
+                image: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=400',
+                category: 'semillas',
+                badge: 'Popular'
+            },
+            {
+                id: 2,
+                name: 'Fertilizante Organico',
+                description: 'Abono natural para cultivos saludables',
+                price: 32.50,
+                image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400',
+                category: 'industrializados',
+                badge: 'Eco'
+            },
+            {
+                id: 3,
+                name: 'Kit de Herramientas',
+                description: 'Set completo de herramientas agricolas',
+                price: 89.99,
+                image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400',
+                category: 'manualidades'
+            },
+            {
+                id: 4,
+                name: 'Sistema de Riego',
+                description: 'Sistema de goteo automatizado',
+                price: 156.00,
+                image: 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=400',
+                category: 'industrializados',
+                badge: 'Nuevo'
+            },
+            {
+                id: 5,
+                name: 'Semillas de Tomate',
+                description: 'Variedad cherry de alta produccion',
+                price: 12.99,
+                image: 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=400',
+                category: 'semillas'
+            },
+            {
+                id: 6,
+                name: 'Guantes de Trabajo',
+                description: 'Guantes resistentes para labores agricolas',
+                price: 28.75,
+                image: 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=400',
+                category: 'manualidades'
+            },
+            {
+                id: 7,
+                name: 'Manguera Extensible',
+                description: 'Manguera de 30m con pistola multiuso',
+                price: 67.50,
+                image: 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=400',
+                category: 'industrializados'
+            },
+            {
+                id: 8,
+                name: 'Insecticida Natural',
+                description: 'Proteccion organica contra plagas',
+                price: 24.99,
+                image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400',
+                category: 'industrializados',
+                badge: 'Eco'
+            },
+            {
+                id: 9,
+                name: 'Papas Nativas',
+                description: 'Variedad de papas andinas organicas',
+                price: 35.00,
+                image: 'https://images.unsplash.com/photo-1518977676601-b53f82abe043?w=400',
+                category: 'tuberculos'
+            },
+            {
+                id: 10,
+                name: 'Quinua Organica',
+                description: 'Quinua de los Andes peruanos',
+                price: 42.00,
+                image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400',
+                category: 'cereales',
+                badge: 'Premium'
+            },
+            {
+                id: 11,
+                name: 'Leche Fresca',
+                description: 'Leche de vaca 100% natural',
+                price: 8.99,
+                image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400',
+                category: 'lacteos'
+            },
+            {
+                id: 12,
+                name: 'Queso Andino',
+                description: 'Queso artesanal de la sierra',
+                price: 15.99,
+                image: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400',
+                category: 'lacteos'
+            },
+            {
+                id: 13,
+                name: 'Manzanas Rojas',
+                description: 'Manzanas frescas de huerto',
+                price: 18.50,
+                image: 'https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=400',
+                category: 'frutas'
+            },
+            {
+                id: 14,
+                name: 'Naranjas de Jugo',
+                description: 'Naranjas dulces para jugo',
+                price: 22.00,
+                image: 'https://images.unsplash.com/photo-1547514701-42782101795e?w=400',
+                category: 'frutas'
+            },
+            {
+                id: 15,
+                name: 'Zanahorias Organicas',
+                description: 'Zanahorias frescas del campo',
+                price: 12.00,
+                image: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400',
+                category: 'hortalizas'
+            },
+            {
+                id: 16,
+                name: 'Lechugas Hidropónicas',
+                description: 'Lechugas crispy cultivadas en agua',
+                price: 8.50,
+                image: 'https://images.unsplash.com/photo-1556801712-76c8eb07bbc9?w=400',
+                category: 'verduras'
+            },
+            {
+                id: 17,
+                name: 'Arvejas Verdes',
+                description: 'Arvejas frescas de la cosecha',
+                price: 14.99,
+                image: 'https://elquende.com/wp-content/uploads/2022/08/Arverja-verde.jpg',
+                category: 'leguminosas'
+            },
+            {
+                id: 18,
+                name: 'Frijoles Negros',
+                description: 'Frijoles secos de alta calidad',
+                price: 16.50,
+                image: 'https://images.unsplash.com/photo-1515543904323-87f0fc4329e2?w=400',
+                category: 'leguminosas'
+            },
+            {
+                id: 19,
+                name: 'Carne de Res',
+                description: 'Cortes premium de res',
+                price: 48.00,
+                image: 'https://images.unsplash.com/photo-1558030006-450675393462?w=400',
+                category: 'carnes'
+            },
+            {
+                id: 20,
+                name: 'Pollo Fresco',
+                description: 'Pollo criado en granja',
+                price: 32.00,
+                image: 'https://images.unsplash.com/photo-1587593810167-a84920ea0781?w=400',
+                category: 'carnes'
+            },
+            {
+                id: 21,
+                name: 'Mermelada Artesanal',
+                description: 'Mermelada de frutas naturales',
+                price: 18.00,
+                image: 'https://images.unsplash.com/photo-1534483509719-3feaee7c30da?w=400',
+                category: 'alimentos-procesados'
+            },
+            {
+                id: 22,
+                name: 'Miel de Abeja',
+                description: 'Miel pura de apiario local',
+                price: 35.00,
+                image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400',
+                category: 'alimentos-procesados',
+                badge: 'Natural'
+            },
+            {
+                id: 23,
+                name: 'Frutas Deshidratadas',
+                description: 'Mix de frutas secas naturales',
+                price: 28.00,
+                image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400',
+                category: 'deshidratados'
+            },
+            {
+                id: 24,
+                name: 'Hierbas Secas',
+                description: 'Hierbas aromaticas deshidratadas',
+                price: 15.00,
+                image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400',
+                category: 'deshidratados'
+            },
+            {
+                id: 25,
+                name: 'Maca en Polvo',
+                description: 'Superalimento andino energizante',
+                price: 45.00,
+                image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400',
+                category: 'productos-andinos',
+                badge: 'Super Food'
+            },
+            {
+                id: 26,
+                name: 'Chuño',
+                description: 'Papa deshidratada tradicional',
+                price: 25.00,
+                image: 'https://elquende.com/wp-content/uploads/2022/11/IMG_20180512_094029-removebg-preview.png',
+                category: 'productos-andinos'
+            },
+            {
+                id: 27,
+                name: 'Piñas de Pino',
+                description: 'Decoracion natural artesanal',
+                price: 12.00,
+                image: 'https://elquende.com/wp-content/uploads/2022/08/Pinas-de-pino-1.jpg',
+                category: 'manualidades'
+            },
+            {
+                id: 28,
+                name: 'Aceite de Oliva',
+                description: 'Aceite extra virgen prensado en frio',
+                price: 38.00,
+                image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400',
+                category: 'industrializados',
+                badge: 'Premium'
+            }
+        ];
+
+        // Cart State
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
+            updateCartUI();
+        });
+
+        // Render Products
+        function renderProducts(productsToRender) {
+            const grid = document.getElementById('product-grid');
+            const count = document.getElementById('products-count');
+
+            count.textContent = `Mostrando ${productsToRender.length} productos`;
+
+            grid.innerHTML = productsToRender.map(product => `
+                <div class="product-card" data-category="${product.category}">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">${product.category.replace('-', ' ')}</span>
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-footer">
+                            <span class="product-price">S/ ${product.price.toFixed(2)}</span>
+                            <button class="add-to-cart" onclick="addToCart(${product.id})">
+                                <i class="fas fa-cart-plus"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter by Category
+        function filterByCategory(category) {
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Filter products
+            const filtered = category === 'todos'
+                ? products
+                : products.filter(p => p.category === category);
+
+            renderProducts(filtered);
+        }
+
+        // Search Products
+        function searchProducts() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const filtered = products.filter(p =>
+                p.name.toLowerCase().includes(searchTerm) ||
+                p.description.toLowerCase().includes(searchTerm) ||
+                p.category.toLowerCase().includes(searchTerm)
+            );
+            renderProducts(filtered);
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            saveCart();
+            updateCartUI();
+            showNotification(`${product.name} agregado al carrito`);
+        }
+
+        // Remove from Cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            updateCartUI();
+        }
+
+        // Update Quantity
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    saveCart();
+                    updateCartUI();
+                }
+            }
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            const cartItems = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            cartCount.textContent = totalItems;
+            cartTotal.textContent = `S/ ${totalPrice.toFixed(2)}`;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-basket"></i>
+                        <p>Tu carrito esta vacio</p>
+                    </div>
+                `;
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-name">${item.name}</h4>
+                            <p class="cart-item-price">S/ ${item.price.toFixed(2)}</p>
+                            <div class="cart-item-controls">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span class="quantity">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                <button class="remove-item" onclick="removeFromCart(${item.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Toggle Cart
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('active');
+            document.querySelector('.cart-overlay').classList.toggle('active');
+        }
+
+        // Show Notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Save Cart to LocalStorage
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // Checkout
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Tu carrito esta vacio');
+                return;
+            }
+            showNotification('Redirigiendo al pago...');
+            // Here you would redirect to checkout page
+        }
+
+        // Search on Enter key
+        document.getElementById('search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchProducts();
+            }
+        });
+    </script>
+</body>
+</html>
